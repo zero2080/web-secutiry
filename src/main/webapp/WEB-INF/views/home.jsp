@@ -10,17 +10,6 @@
 <head>
 	<jsp:include page="./meta.jsp"/>
 	<style>
-		body{
-			max-width:1024px;
-			margin:0 auto;
-		}
-		body>nav{
-			height:80px;
-			width:100%;
-			display:flex;
-			justify-content: space-between;
-		    align-items: center;
-		}
 		section>table{
 			width:100%;
 		    border-collapse: collapse;
