@@ -9,12 +9,13 @@ branches:
 # Travis CI 서버의 Home
 cache:
   directories:
-    - $HOME/.m2
+    - '$HOME/.m2/repository'
 
+script: "mmvn package"
 
 # CI 실행 완료 시 메일로 알람
 notification:
   email:
     recipents:
-      - zero2080@naver.com
+      - "zero2080@naver.com"
       
