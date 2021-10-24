@@ -163,7 +163,7 @@
  
                 <configuration>
                     <warSourceDirectory>WebContent</warSourceDirectory>
-                    <webXml>WebContent/WEB-INF/web.xml</webXml>
+                    <webXml>webapp/WEB-INF/web.xml</webXml>
                 </configuration>
             </plugin>
             <plugin>
