@@ -26,9 +26,10 @@ before-deploy:
   
 deploy:
   - provider: s3
-    access_key_id: $AWS_ACCESS_KEY
-    secret_access_key: $AWS_SECRET_KEY
+    access_key_id: $AWS-ACCESS-KEY
+    secret_access_key: $AWS-SECRET-KEY
     bucket: travis-auto-deploy
+    region: ap-northeast-2
     skip-cleanup: true
     acl: private
     local_dir: deploy
