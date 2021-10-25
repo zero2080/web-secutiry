@@ -42,6 +42,6 @@ deploy:
     key: web-secutiry.zip
     bundle_type: zip
     application: web-security
-    deployment_group: web-seciruty-auto-deploy
+    deployment_group: web-security-auto-deploy
     region: ap-northeast-2
     wait-until-deploy: true
