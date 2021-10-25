@@ -10,6 +10,7 @@ const login = ()=>{
 	}).then(res=>res.json())
 	.then(data=>{
 		if(data[0].memberId===id){
+			console.log(data);
 			sessionStorage.setItem("memberId",id);
 			location.href=`${conPath}main`;
 		}
