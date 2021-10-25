@@ -34,3 +34,14 @@ deploy:
     acl: private
     local_dir: deploy
     wait-until-deployed: true
+    
+  - provider: codedeploy
+    access_key_id: AKIATWG6BDCM2OO7TSPS
+    secret_access_key: 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
+    bucket: travis-auto-deploy
+    key: web-secutiry.zip
+    bundle_type: zip
+    application: web-seciruty
+    deployment_group: web-seciruty-auto-deploy
+    region: ap-northeast-2
+    wait-until-deploy: true
