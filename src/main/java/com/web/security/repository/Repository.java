@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.web.security.model.Board;
 import com.web.security.model.Member;
+import com.web.security.model.Message;
 
 @org.springframework.stereotype.Repository
 public class Repository {
@@ -105,13 +106,13 @@ public class Repository {
 	
 	public void boardWrite(Board board) {
 		query = new StringBuffer();
-		query.append("INSERT INTO `board` (title,memberId,content,visible) values ('");
+		query.append("INSERT INTO `board` (title,memberId,content,visible) values (\"");
 		query.append(board.getTitle());
-		query.append("','");
+		query.append("\",\"");
 		query.append(board.getMemberId());
-		query.append("','");
+		query.append("\",\"");
 		query.append(board.getContent());
-		query.append("',");
+		query.append("\",");
 		query.append(board.isVisible()?1:0);
 		query.append(")");
 		
@@ -129,7 +130,7 @@ public class Repository {
 	public List<Board> getBoardList() {
 		// TODO Auto-generated method stub
 		query = new StringBuffer();
-		query.append("SELECT id,title,memberId,visible,DATE_FORMAT(createdAt,'%Y-%m-%d %H:%i:%s') AS createdAt FROM `board`");
+		query.append("SELECT id,title,memberId,visible,DATE_FORMAT(createdAt,'%Y-%m-%d %H:%i:%s') AS createdAt FROM `board` ORDER BY createdAt DESC");
 		List<Board> result = new ArrayList<>();
 		try {
 			conn = DriverManager.getConnection(url,id,password);
@@ -151,6 +152,30 @@ public class Repository {
 			closer();
 		}
 		
+		return result;
+	}
+	
+	public List<Message> getMessages(String memberId) {
+		// TODO Auto-generated method stub
+		List<Message> result = new ArrayList<>();
+		
+		try {
+			conn = DriverManager.getConnection(url,id,password);
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery("SELECT id,fromId,content,DATE_FORMAT(createdAt,'%Y-%m-%d %H:%i:%s') AS createdAt FROM `message` WHERE `toId`='" + memberId + "' ORDER BY createdAt DESC");
+			while(rs.next()) {
+				Message msg = new Message();
+				msg.setId(rs.getInt("id"));
+				msg.setContent(rs.getString("content"));
+				msg.setFromId(rs.getString("fromId"));
+				msg.setCreatedAt(rs.getString("createdAt"));
+				result.add(msg);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally{
+			closer();
+		}
 		return result;
 	}
 	
@@ -185,4 +210,5 @@ public class Repository {
 		}
 		
 	}
+
 }

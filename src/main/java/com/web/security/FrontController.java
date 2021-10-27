@@ -1,5 +1,7 @@
 package com.web.security;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.web.security.model.Board;
+import com.web.security.model.Message;
 import com.web.security.service.RestService;
 
 @Controller
@@ -29,4 +32,11 @@ public class FrontController {
 		req.setAttribute("detail",board);
 		return "boardDetail";
 	}
+	
+	@GetMapping(path="/write")
+	public String writerForm() {
+		return "write";
+	}
+	
+	
 }

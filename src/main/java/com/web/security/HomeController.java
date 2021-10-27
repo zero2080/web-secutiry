@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.web.security.model.Board;
 import com.web.security.model.Member;
+import com.web.security.model.Message;
 import com.web.security.service.RestService;
 
 @RestController
@@ -45,6 +46,12 @@ public class HomeController {
 		
 	}
 	
+	@GetMapping(path="/message")
+	public List<Message> messageList(@RequestParam String memberId){
+		List<Message> result = service.getMessages(memberId);
+		return result;
+	}
+	
 	@PostMapping(path="/login")
 	public ResponseEntity<List<Member>> login(@RequestBody Member member){
 		List<Member> result = service.login(member);
@@ -54,4 +61,5 @@ public class HomeController {
 			return new ResponseEntity<List<Member>>(result,HttpStatus.OK);
 		}
 	}
+	
 }

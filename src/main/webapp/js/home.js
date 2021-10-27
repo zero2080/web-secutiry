@@ -1,7 +1,3 @@
-let conPath = location.href.substring(location.href.indexOf(location.host)+location.host.length,location.href.length).replace('/main','');
-let id = sessionStorage.getItem('memberId');
-
-document.getElementById('myId').innerText=id;
 
 fetch(`${conPath}/board/list`,{
 	headers:new Headers({'Content-Type':'application/json'}),
@@ -23,7 +19,7 @@ fetch(`${conPath}/board/list`,{
 		
 		num.innerText=datum.id;
 		
-		visible.innerText=datum.visible?'비공개':'공개';
+		visible.innerText=datum.visible?'공개':'비공개';
 		
 		if(id===datum.memberId){
 			writer.innerText=datum.memberId;

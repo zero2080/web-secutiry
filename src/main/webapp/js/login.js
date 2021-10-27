@@ -1,4 +1,3 @@
-let conPath = location.href.substring(location.href.indexOf(location.host)+location.host.length,location.href.length);
 const login = ()=>{
 	let id = document.getElementById('id').value;
 	let password = document.getElementById('pwd').value;

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.web.security.model.Board;
 import com.web.security.model.Member;
+import com.web.security.model.Message;
 import com.web.security.repository.Repository;
 
 @Service
@@ -35,6 +36,11 @@ public class RestService {
 	public List<Board> boardList() {
 		// TODO Auto-generated method stub
 		return repo.getBoardList();
+	}
+
+	public List<Message> getMessages(String memberId) {
+		// TODO Auto-generated method stub
+		return repo.getMessages(memberId);
 	}
 
 }
