@@ -76,7 +76,7 @@ public class Repository {
 		Board result = new Board();
 		
 		query = new StringBuffer();
-		query.append("SELECT id,title,memberId,content,DATE_FORMAT(createdAt,'%Y-%m-%d %H:%i:%s') FROM board WHERE id=");
+		query.append("SELECT id,title,memberId,content,visible,DATE_FORMAT(createdAt,'%Y-%m-%d %H:%i:%s') FROM board WHERE id=");
 		query.append(id);
 		
 		try {
