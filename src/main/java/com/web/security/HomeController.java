@@ -53,12 +53,12 @@ public class HomeController {
 	}
 	
 	@PostMapping(path="/login")
-	public ResponseEntity<List<Member>> login(@RequestBody Member member){
-		List<Member> result = service.login(member);
-		if(result.size()==0) {
-			return new ResponseEntity<List<Member>>(HttpStatus.UNAUTHORIZED);
-		}else{
-			return new ResponseEntity<List<Member>>(result,HttpStatus.OK);
+	public ResponseEntity<?> login(@RequestBody Member member){
+		try {
+			service.login(member);
+			return new ResponseEntity<>(HttpStatus.OK);
+		}catch(Exception e) {
+			return new ResponseEntity<>(e.getLocalizedMessage(),HttpStatus.UNAUTHORIZED);
 		}
 	}
 	

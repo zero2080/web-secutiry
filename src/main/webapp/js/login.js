@@ -1,3 +1,10 @@
+var conPath = '/';
+var id = '';
+
+if(location.href.indexOf('security')>0){
+	conPath = '/security';
+}
+
 const login = ()=>{
 	let id = document.getElementById('id').value;
 	let password = document.getElementById('pwd').value;

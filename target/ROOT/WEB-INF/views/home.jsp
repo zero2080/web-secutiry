@@ -2,7 +2,6 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
 <c:set var="conPath" value="<%=request.getContextPath() %>"/>
 
 <!DOCTYPE html>
@@ -10,17 +9,6 @@
 <head>
 	<jsp:include page="./meta.jsp"/>
 	<style>
-		body{
-			max-width:1024px;
-			margin:0 auto;
-		}
-		body>nav{
-			height:80px;
-			width:100%;
-			display:flex;
-			justify-content: space-between;
-		    align-items: center;
-		}
 		section>table{
 			width:100%;
 		    border-collapse: collapse;
@@ -39,7 +27,7 @@
 <body>
 	<nav>
 		<span><span id="myId"></span>님 어서오세요.</span>
-		<span><a href="${conPath }/message">메세지함</a>&nbsp; &nbsp;<a href="${conPath }/board">게시판</a></span>
+		<span><a href="${conPath }/message">메세지함</a>&nbsp; &nbsp;<a href="${conPath }/main">게시판</a></span>
 	</nav>
 	<article>
 		<section>
@@ -69,6 +57,9 @@
 					
 				</section>
 			</article>
+		</section>
+		<section>
+			<a href="${conPath }/write" >글쓰기</a>
 		</section>
 	</article>
 	<script src="${conPath }/js/home.js" type="text/javascript"></script>

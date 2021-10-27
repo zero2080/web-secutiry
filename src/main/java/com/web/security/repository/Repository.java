@@ -19,8 +19,8 @@ public class Repository {
 	private final String driver = "com.mysql.cj.jdbc.Driver";
 	private final String id = "blackbear2080";
 	private final String password = "dhqjatn0732";
-//	private final String url="jdbc:mysql://server-db.c9vq7tfs4ivu.ap-northeast-2.rds.amazonaws.com:3306/webSecurity?characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull";
-	private final String url="jdbc:mysql://localhost:3306/webSecurity?characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull";
+	private final String url="jdbc:mysql://server-db.c9vq7tfs4ivu.ap-northeast-2.rds.amazonaws.com:3306/webSecurity?characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull";
+//	private final String url="jdbc:mysql://localhost:3306/webSecurity?characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull";
 	
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
@@ -37,8 +37,7 @@ public class Repository {
 		}
 	}
 	
-	public List<Member> login(Member member) {
-		List<Member> result = new ArrayList<>();
+	public void login(Member member) throws Exception {
 		
 		query = new StringBuffer();
 		query.append("SELECT id,memberId, DATE_FORMAT(createdAt,'%Y-%m-%d %H:%i:%s') FROM member WHERE memberId='");
@@ -49,30 +48,27 @@ public class Repository {
 		query.append(member.getMemberPassword());
 		query.append("'");
 		
-		System.out.println(query.toString());
-		
 		try {
 			conn = DriverManager.getConnection(url,id,password);
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(query.toString());
 			
-			while(rs.next()) {
+			if(rs.next()) {
 				int i = 0;
 				Member data = new Member();
 				data.setId(rs.getInt(++i));
 				data.setMemberId(rs.getString(++i));
 				data.setCreatedAt(rs.getString(++i));
-				
-				result.add(data);
+			}else {
+				throw new Exception("login fail");
 			}
 			
 		}catch(Exception e) {
 			e.printStackTrace();
+			throw new Exception("login fail");
 		}finally {
 			closer();
 		}
-		
-		return result;
 	}
 
 	public Board boardDetail(int id) {

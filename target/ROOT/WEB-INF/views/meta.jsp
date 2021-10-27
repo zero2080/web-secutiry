@@ -21,4 +21,24 @@
 <meta name="msapplication-TileImage" content="${conPath }/icon/ms-icon-144x144.png">
 <meta name="theme-color" content="#ffffff">
 <meta name="description" content="보안 강좌 사이트"/>
+<link href="${conPath }/css/header.css" rel="stylesheet" type="text/css"></link>
+<script>
+	var conPath = location.href.substring(location.href.indexOf(location.host)+location.host.length,location.href.length);
+	var id = '';
+	if(conPath.indexOf('/') !== conPath.lastIndexOf('/')){
+		conPath = conPath.substring(0,conPath.lastIndexOf('/'));		
+	}
+	
+	window.onload=()=>{
+		id = sessionStorage.getItem('memberId');
+		
+		if(id===null || id===''){
+			location.href=`${conPath}`;
+		}else{
+			document.getElementById('myId').innerText=id;	
+		}
+		
+	}
+	
+</script>
 <title>웹 사이트 보안</title>

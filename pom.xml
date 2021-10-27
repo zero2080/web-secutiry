@@ -154,6 +154,7 @@
 		</dependency>        
 	</dependencies>
     <build>
+    	<sourceDirectory>src/main/java</sourceDirectory>
     	<finalName>ROOT</finalName>
         <plugins>
         	<plugin>
@@ -161,10 +162,17 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.1.1</version>
  
-                <configuration>
+ 
+ 				<configuration>
+					<warSourceDirectory>src/main/webapp</warSourceDirectory> <!-- war파일 디렉토리 -->
+					<failOnMissingWebXml>false</failOnMissingWebXml> <!-- web.xml이 없을 때 에러를 낼건지 안낼건지 -->
+					<encoding>UTF-8</encoding>
+				</configuration>
+ 
+               <!--  <configuration>
                     <warSourceDirectory>WebContent</warSourceDirectory>
                     <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
-                </configuration>
+                </configuration> -->
             </plugin>
             <plugin>
                 <artifactId>maven-eclipse-plugin</artifactId>
@@ -190,6 +198,7 @@
                     <compilerArgument>-Xlint:all</compilerArgument>
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>
+                    <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
             <plugin>

@@ -23,10 +23,12 @@
 <meta name="description" content="보안 강좌 사이트"/>
 <link href="${conPath }/css/header.css" rel="stylesheet" type="text/css"></link>
 <script>
-	var conPath = location.href.substring(location.href.indexOf(location.host)+location.host.length,location.href.length);
+	var conPath = '/';
 	var id = '';
-	if(conPath.indexOf('/') !== conPath.lastIndexOf('/')){
-		conPath = conPath.substring(0,conPath.lastIndexOf('/'));		
+	if(conPath.indexOf('security')>0){
+		conPath = '/security'		
+	}else{
+		conPath = '/';
 	}
 	
 	window.onload=()=>{

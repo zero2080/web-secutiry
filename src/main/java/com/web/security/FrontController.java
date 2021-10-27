@@ -38,5 +38,8 @@ public class FrontController {
 		return "write";
 	}
 	
-	
+	@GetMapping(path="/msgbox")
+	public String message() {
+		return "message";
+	}
 }

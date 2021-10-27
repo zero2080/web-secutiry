@@ -20,8 +20,8 @@ public class RestService {
 		this.repo=repo;
 	}
 	
-	public List<Member> login(Member member){
-		return repo.login(member);
+	public void login(Member member) throws Exception {
+		repo.login(member);
 	}
 
 	public Board boardDetail(int id) {
