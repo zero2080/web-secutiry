@@ -23,17 +23,13 @@
 <meta name="description" content="보안 강좌 사이트"/>
 <link href="${conPath }/css/header.css" rel="stylesheet" type="text/css"></link>
 <script>
-	var conPath = '/';
-	var id = '';
-	if(conPath.indexOf('security')>0){
+	var conPath = '';
+	var id = sessionStorage.getItem('memberId');
+	if(location.href.indexOf('security')>0){
 		conPath = '/security'		
-	}else{
-		conPath = '/';
 	}
 	
 	window.onload=()=>{
-		id = sessionStorage.getItem('memberId');
-		
 		if(id===null || id===''){
 			location.href=`${conPath}`;
 		}else{
