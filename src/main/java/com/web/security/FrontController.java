@@ -42,4 +42,9 @@ public class FrontController {
 	public String message() {
 		return "message";
 	}
+	
+	@GetMapping(path="/join")
+	public String join() {
+		return "join";
+	}
 }

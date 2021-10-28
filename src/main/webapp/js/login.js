@@ -22,3 +22,7 @@ const login = ()=>{
 		}
 	})
 }
+
+const join = ()=>{
+	location.href=`${conPath}/join`
+}
