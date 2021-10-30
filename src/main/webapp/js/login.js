@@ -1,7 +1,7 @@
 var conPath = '';
 var id = '';
 
-if(location.href.indexOf('security')>0){
+if(location.href.indexOf('/security')>0){
 	conPath = '/security';
 }
 
@@ -128,6 +128,11 @@ const join = ()=>{
 		joinForm.style.height='400px';
 	},10);
 	//location.href=`${conPath}/join`
+}
+const enter = (e)=>{
+	if(e.keyCode===13){
+		login()
+	}
 }
 
 const validation = (member)=>{

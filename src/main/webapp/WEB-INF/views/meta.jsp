@@ -25,7 +25,7 @@
 <script>
 	var conPath = '';
 	var id = sessionStorage.getItem('memberId');
-	if(location.href.indexOf('security')>0){
+	if(location.href.indexOf('/security')>0){
 		conPath = '/security'		
 	}
 	

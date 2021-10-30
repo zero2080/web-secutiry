@@ -37,7 +37,7 @@
                 <br/>
                 <label>
                     <img src="${conPath}/img/pw_icon.png" alt="비밀번호 아이콘"/>
-                    <input type="password" id="pwd" placeholder="비밀번호"/>
+                    <input type="password" id="pwd" onkeyup="enter(event)" placeholder="비밀번호"/>
                 </label>
                 <br/>
                 <input type="button" onClick="login()" value="LOGIN"/>
