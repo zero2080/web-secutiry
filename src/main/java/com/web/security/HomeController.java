@@ -51,10 +51,22 @@ public class HomeController {
 		
 	}
 	
-	@GetMapping(path="/message")
-	public List<Message> messageList(@RequestParam String memberId){
-		List<Message> result = service.getMessages(memberId);
-		return result;
+	@GetMapping(path="/message/list")
+	public ResponseEntity<Page<Message>> messageList(Page<Message> page){
+		try {
+			return new ResponseEntity<>(service.getMessages(page),HttpStatus.OK);
+		}catch(Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@PostMapping(path="/message")
+	public ResponseEntity<?> sendMsg(@RequestBody Message message){
+		try {
+			return new ResponseEntity<>(service.sendMessage(message),HttpStatus.OK);
+		}catch(Exception e) {
+			return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 	
 	@PostMapping(path="/login")

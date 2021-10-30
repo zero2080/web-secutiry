@@ -125,7 +125,7 @@ public class Repository {
 		}
 	}
 	
-	public <T extends PageNation> int getTotalCount(Class<T> pageNation) throws Exception  {
+	public <T extends PageNation> int getTotalCount(Class<T> pageNation,String memberId) throws Exception  {
 		// TODO Auto-generated method stub
 		query = new StringBuffer();
 		query.append("SELECT COUNT(*) FROM ");
@@ -134,6 +134,9 @@ public class Repository {
 			query.append("`board`");
 		}else if(pageNation.equals(Message.class)){
 			query.append("`message`");
+			query.append(" WHERE toId = '");
+			query.append(memberId);
+			query.append("'");
 		}
 		
 		try {
@@ -183,14 +186,14 @@ public class Repository {
 		return page;
 	}
 	
-	public List<Message> getMessages(String memberId) {
+	public Page<Message> getMessages(Page<Message> page) {
 		// TODO Auto-generated method stub
 		List<Message> result = new ArrayList<>();
 		
 		try {
 			conn = DriverManager.getConnection(url,id,password);
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery("SELECT id,fromId,content,DATE_FORMAT(createdAt,'%Y-%m-%d %H:%i:%s') AS createdAt FROM `message` WHERE `toId`='" + memberId + "' ORDER BY createdAt DESC");
+			rs = stmt.executeQuery("SELECT id,fromId,content,DATE_FORMAT(createdAt,'%Y-%m-%d %H:%i:%s') AS createdAt FROM `message` WHERE `toId`='" + page.getMemberId() + "' ORDER BY id DESC LIMIT "+page.getStartRow()+","+page.getPageSize());
 			while(rs.next()) {
 				Message msg = new Message();
 				msg.setId(rs.getInt("id"));
@@ -199,12 +202,13 @@ public class Repository {
 				msg.setCreatedAt(rs.getString("createdAt"));
 				result.add(msg);
 			}
+			page.setList(result);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally{
 			closer();
 		}
-		return result;
+		return page;
 	}
 	
 	public void joinMember(Member member) throws Exception{
@@ -258,6 +262,24 @@ public class Repository {
 			}
 		}
 		
+	}
+
+	public Boolean sendMessage(Message message) throws Exception {
+		// TODO Auto-generated method stub
+		query = new StringBuffer();
+		query.append(String.format("INSERT INTO `message` (toId,content, fromId) VALUES('%s','%s','%s')",message.getToId(),message.getContent(),message.getFromId()));
+		try {
+			conn = DriverManager.getConnection(url,id,password);
+			stmt = conn.createStatement();
+			stmt.executeUpdate(query.toString());
+			return true;
+		}catch(Exception e) {
+			System.out.println(query.toString());
+			e.printStackTrace();
+			throw e;
+		}finally {
+			closer();
+		}
 	}
 
 

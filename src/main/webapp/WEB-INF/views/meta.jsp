@@ -35,9 +35,9 @@
 		}else{
 			document.getElementById('myId').innerText=id;
 			if(location.href.indexOf('/main')>0||location.href.indexOf('/board')>0){
-				document.querySelector('ul.gnb>a>li:nth-of-type(1)').classList.add('active');
+				document.querySelector('ul.gnb>a:nth-of-type(1)>li').classList.add('active');
 			}else{
-				document.querySelector('ul.gnb>a>li:nth-of-type(2)').classList.add('active');
+				document.querySelector('ul.gnb>a:nth-of-type(2)>li').classList.add('active');
 			}
 		}
 		

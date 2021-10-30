@@ -34,18 +34,25 @@ public class RestService {
 
 	public Page<Board> boardList(Page<Board> page) throws Exception {
 		// TODO Auto-generated method stub
-		page.setTotalCount(repo.getTotalCount(Board.class));
+		page.setTotalCount(repo.getTotalCount(Board.class,null));
 		return repo.getBoardList(page);
 	}
 
-	public List<Message> getMessages(String memberId) {
+	public Page<Message> getMessages(Page<Message> page) throws Exception{
 		// TODO Auto-generated method stub
-		return repo.getMessages(memberId);
+		page.setTotalCount(repo.getTotalCount(Message.class,page.getMemberId()));
+		
+		return repo.getMessages(page);
 	}
 
 	public void join(Member member) throws Exception {
 		// TODO Auto-generated method stub
 		repo.joinMember(member);
+	}
+
+	public Boolean sendMessage(Message message) throws Exception {
+		// TODO Auto-generated method stub
+		return repo.sendMessage(message);
 	}
 
 }

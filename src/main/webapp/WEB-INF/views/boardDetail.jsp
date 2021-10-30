@@ -31,7 +31,8 @@
 								${detail.title }
 							</td>
 							<td>
-								<span>작성자</span> <span>${detail.memberId }</span>
+								<span>작성자</span> <span>${detail.memberId }</span> <input type="button" data-to-id="${detail.memberId}" value="메세지" onclick="msgPop(this)"/>
+								
 							</td>
 							<td>
 								<span>작성일</span> <span>${detail.createdAt }</span>

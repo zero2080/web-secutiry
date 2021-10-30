@@ -35,20 +35,18 @@ const prevPage = ()=>{
 						
 						visible.innerText=datum.visible?'공개':'비공개';
 						
-						if(id===datum.memberId){
+						if(datum.visible || id===datum.memberId){
 							writer.innerText=datum.memberId;
+							tr.addEventListener('click',()=>detail(datum.id));
 						}else{
 							writer.innerText=datum.memberId.substring(0,3)+'***';
+							tr.addEventListener('click',()=>alert('비공개 글입니다'));
 						}
 						
 						createDate.innerText=datum.createdAt;
 						
 						title.innerText = datum.title;
 						
-						if(id===datum.memberId || datum.visible){
-							tr.addEventListener('click',()=>detail(datum.id));
-								
-						}
 						document.querySelector('table>tbody').appendChild(tr);
 						
 					});
@@ -93,19 +91,18 @@ const nextPage = ()=>{
 						
 						visible.innerText=datum.visible?'공개':'비공개';
 						
-						if(id===datum.memberId){
+						if(datum.visible || id===datum.memberId){
 							writer.innerText=datum.memberId;
+							tr.addEventListener('click',()=>detail(datum.id));
 						}else{
 							writer.innerText=datum.memberId.substring(0,3)+'***';
+							tr.addEventListener('click',()=>alert('비공개 글입니다'));
 						}
 						
 						createDate.innerText=datum.createdAt;
 						
 						title.innerText = datum.title;
 						
-						if(id===datum.memberId || datum.visible){
-							tr.addEventListener('click',()=>detail(datum.id));	
-						}
 						document.querySelector('table>tbody').appendChild(tr);
 					});
 					totalPageCount = data.totalPageCount;

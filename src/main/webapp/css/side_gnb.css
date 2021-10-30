@@ -36,7 +36,7 @@ aside>div {
 aside>div>img {
     height: 90%;
 }
-aside>ul>li:first-child {
+aside>ul>a:first-child >li{
     border-top: 1px solid lightgray;
 }
 aside>ul>a>li {
