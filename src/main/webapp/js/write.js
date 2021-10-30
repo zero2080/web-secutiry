@@ -14,7 +14,11 @@
 			method:'POST',
 			body:JSON.stringify(board)
 		}).then(res=>{
-			console.log(res);
+			if(res.ok){
+				location.href=`${conPath}/main`;
+			}else{
+				alert(`알수없는 오류가 발생했습니다.(${res.status})`);
+			}
 		});
 		
 	});

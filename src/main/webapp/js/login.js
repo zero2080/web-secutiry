@@ -1,8 +1,17 @@
 var conPath = '';
 var id = '';
 
+
+
 if(location.href.indexOf('/security')>0){
 	conPath = '/security';
+}
+
+if(sessionStorage.getItem('memberId') !== '' 
+	&& sessionStorage.getItem('memberId') !== undefined 
+	&& sessionStorage.getItem('memberId') !== null
+	&& sessionStorage.getItem('memberId').length>0){
+	location.href=`${conPath}/main`;
 }
 
 const login = ()=>{
