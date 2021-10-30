@@ -2,13 +2,12 @@ package com.web.security.service;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.stereotype.Service;
 
 import com.web.security.model.Board;
 import com.web.security.model.Member;
 import com.web.security.model.Message;
+import com.web.security.model.Page;
 import com.web.security.repository.Repository;
 
 @Service
@@ -33,14 +32,20 @@ public class RestService {
 		repo.boardWrite(board);
 	}
 
-	public List<Board> boardList() {
+	public Page<Board> boardList(Page<Board> page) throws Exception {
 		// TODO Auto-generated method stub
-		return repo.getBoardList();
+		page.setTotalCount(repo.getTotalCount(Board.class));
+		return repo.getBoardList(page);
 	}
 
 	public List<Message> getMessages(String memberId) {
 		// TODO Auto-generated method stub
 		return repo.getMessages(memberId);
+	}
+
+	public void join(Member member) throws Exception {
+		// TODO Auto-generated method stub
+		repo.joinMember(member);
 	}
 
 }

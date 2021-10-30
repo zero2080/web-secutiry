@@ -24,73 +24,7 @@
 		<meta name="description" content="보안 강좌 사이트"/>
 		<title>웹 사이트 보안</title>
 		<script src="${conPath }/js/login.js" type="text/javascript"></script>
-		<style>
-		* {
-		    padding:0;
-		    margin:0;
-		}
-		html,body {
-		    width:100%;
-		    height:100%;
-		}
-		#wrap{
-		    width:100%;
-		    height:100%;
-		    overflow:hidden;
-		}
-		#form_wrap{
-		    width:500px;
-		    height:400px;
-		    margin:150px auto 0;
-		    padding : 20px 0 40px;
-		    border-radius: 20px;
-		    box-shadow:none;
-		    text-align: center;
-		    transition: 1s;
-		    display: flex;
-		    flex-direction: column;
-		    align-items: center;
-		}
-		#form_wrap:hover {
-		    box-shadow: 0 0 5px 5px #e5e5e5ee;
-		}
-		
-		#logo{
-		    margin:10%;
-		    width:19%;
-		}
-		label {
-	    	display: flex;
-		    align-items: center;
-		}
-		
-		label>img {
-		    width:30px;
-		    vertical-align: middle;
-		}
-		
-		input[type=text],input[type=password] {
-		    border-top:none;
-		    border-left:none;
-		    border-right:none;
-		    border-bottom:2px solid gray;
-		    font-size:1.2em;
-		    padding:2% 1% 1%;
-		    vertical-align: middle;
-		}
-		
-		input[type=button] {
-		    width: 280px;
-		    height: 50px;
-		    font-size: 1.2em;
-		    font-weight: bold;
-		    letter-spacing: 3px;
-		    background-color: skyblue;
-		    color: white;
-		    border: none;
-		    margin-bottom:10px;
-		}
-		</style>
+		<link href="${conPath }/css/login.css" rel="stylesheet" type="text/css"/>
 	</head>
 	<body>
 		 <div id ="wrap">

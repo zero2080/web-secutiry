@@ -21,7 +21,7 @@
 <meta name="msapplication-TileImage" content="${conPath }/icon/ms-icon-144x144.png">
 <meta name="theme-color" content="#ffffff">
 <meta name="description" content="보안 강좌 사이트"/>
-<link href="${conPath }/css/header.css" rel="stylesheet" type="text/css"></link>
+<link href="${conPath }/css/side_gnb.css" rel="stylesheet" type="text/css"></link>
 <script>
 	var conPath = '';
 	var id = sessionStorage.getItem('memberId');
@@ -31,11 +31,21 @@
 	
 	window.onload=()=>{
 		if(id===null || id===''){
-			location.href=`${conPath}`;
+			location.href=conPath;
 		}else{
-			document.getElementById('myId').innerText=id;	
+			document.getElementById('myId').innerText=id;
+			if(location.href.indexOf('/main')>0||location.href.indexOf('/board')>0){
+				document.querySelector('ul.gnb>a>li:nth-of-type(1)').classList.add('active');
+			}else{
+				document.querySelector('ul.gnb>a>li:nth-of-type(2)').classList.add('active');
+			}
 		}
 		
+	}
+	
+	const logout= ()=>{
+		sessionStorage.setItem('memberId','');
+		location.href=conPath;
 	}
 	
 </script>

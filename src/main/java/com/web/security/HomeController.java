@@ -1,7 +1,7 @@
 package com.web.security;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.web.security.model.Board;
 import com.web.security.model.Member;
 import com.web.security.model.Message;
+import com.web.security.model.Page;
 import com.web.security.service.RestService;
 
 @RestController
@@ -26,8 +27,12 @@ public class HomeController {
 	}
 	
 	@GetMapping(path="/board/list")
-	public List<Board> list(){
-		return service.boardList();
+	public ResponseEntity<Page<Board>> list(Page<Board> page){
+		try {
+			return new ResponseEntity<>(service.boardList(page),HttpStatus.OK);
+		} catch(Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 	
 	@GetMapping(path="/board")
@@ -41,7 +46,7 @@ public class HomeController {
 			service.boardWrite(board);
 			return new ResponseEntity<>(HttpStatus.OK);
 		}catch(Exception e) {
-			return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
 	}
@@ -58,8 +63,18 @@ public class HomeController {
 			service.login(member);
 			return new ResponseEntity<>(HttpStatus.OK);
 		}catch(Exception e) {
-			return new ResponseEntity<>(e.getLocalizedMessage(),HttpStatus.UNAUTHORIZED);
+			return new ResponseEntity<>(new HashMap<String,String>(){{put("message",e.getMessage());}},HttpStatus.UNAUTHORIZED);
 		}
 	}
 	
+	@SuppressWarnings("serial")
+	@PostMapping(path="/join", produces="application/json;charset=utf-8")
+	public ResponseEntity<?> join(@RequestBody Member member){
+		try {
+			service.join(member);
+			return new ResponseEntity<>(HttpStatus.OK);
+		}catch(Exception e) {
+			return new ResponseEntity<>(new HashMap<String,String>(){{put("message",e.getMessage());}},HttpStatus.BAD_REQUEST) ;
+		}
+	}
 }

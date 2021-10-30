@@ -3,7 +3,7 @@ package com.web.security.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Board {
+public class Board implements PageNation {
 	private int id;
 	private String title;
 	private String memberId;

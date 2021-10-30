@@ -1,6 +1,6 @@
 package com.web.security.model;
 
-public class Message {
+public class Message implements PageNation{
 	private int id;
 	private String fromId;
 	private String toId;

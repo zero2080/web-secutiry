@@ -33,7 +33,7 @@ public class FrontController {
 		return "boardDetail";
 	}
 	
-	@GetMapping(path="/write")
+	@GetMapping(path="/board/write")
 	public String writerForm() {
 		return "write";
 	}
@@ -41,10 +41,5 @@ public class FrontController {
 	@GetMapping(path="/msgbox")
 	public String message() {
 		return "message";
-	}
-	
-	@GetMapping(path="/join")
-	public String join() {
-		return "join";
 	}
 }

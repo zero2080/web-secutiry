@@ -8,60 +8,58 @@
 <html lang="ko">
 <head>
 	<jsp:include page="./meta.jsp"/>
-	<style>
-		section>table{
-			width:100%;
-		    border-collapse: collapse;
-		}
-		table>thead{
-			height:40px
-		}
-		table>tbody>tr{
-			cursor:pointer;
-		}
-		table>tbody>tr>td{
-			text-align:center;
-		}
-	</style>
+	<link href="${conPath }/css/board.css" rel="stylesheet" type="text/css"></link>
 </head>
 <body>
-	<nav>
-		<span><span id="myId"></span>님 어서오세요.</span>
-		<span><a href="${conPath }/message">메세지함</a>&nbsp; &nbsp;<a href="${conPath }/main">게시판</a></span>
-	</nav>
-	<article>
-		<section>
-			<table border=1>
-				<colgroup>
-					<col style="width:7%"/>
-					<col style="width:50%"/>
-					<col style="width:11%"/>
-					<col style="width:12%"/>
-					<col style="width:20%"/>
-				</colgroup>
-				<thead>
-					<tr>
-						<th>글번호</th>
-						<th>글제목</th>
-						<th>공개</th>
-						<th>작성자</th>
-						<th>작성일</th>
-					</tr>
-				</thead>
-				<tbody>
-					
-				</tbody>
-			</table>
+	<div id="root">
+		<jsp:include page="./sideGnb.jsp"/>
+        <section>
+        	<nav>
+				<span><span id="myId"></span>님 어서오세요.</span>
+				<span>
+					<a href="javascript:logout()">로그아웃</a>
+				</span>
+			</nav>
 			<article>
 				<section>
-					
+					<table>
+						<colgroup>
+							<col style="width:7%"/>
+							<col style="width:50%"/>
+							<col style="width:11%"/>
+							<col style="width:12%"/>
+							<col style="width:20%"/>
+						</colgroup>
+						<thead>
+							<tr>
+								<th><p>글번호</p></th>
+								<th><p>글제목</p></th>
+								<th><p>공개</p></th>
+								<th><p>작성자</p></th>
+								<th><p>작성일</p></th>
+							</tr>
+						</thead>
+						<tbody>
+							
+						</tbody>
+					</table>
+					<article>
+						<section id="pageNation">
+							<ul>
+								<li id="prevPage" onClick="prevPage()">이전</li>
+								<li id="currentPage">1<li>
+								<li id="nextPage" onclick="nextPage()">다음</li>
+							</ul>
+						</section>
+					</article>
+				</section>
+				<section>
+					<a href="${conPath }/board/write" >글쓰기</a>
 				</section>
 			</article>
-		</section>
-		<section>
-			<a href="${conPath }/write" >글쓰기</a>
-		</section>
-	</article>
+        </section>
+	</div>
+	
 	<script src="${conPath }/js/home.js" type="text/javascript"></script>
 </body>
 </html>

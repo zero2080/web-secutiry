@@ -1,0 +1,52 @@
+@charset "UTF-8";
+
+#root > section > article > section > table{
+	border-collapse:collapse;
+	width:100%;	
+}
+
+#root > section > article > section > table>thead>tr>th{
+	text-align:center;
+	
+}
+
+#root > section > article > section > table>thead>tr{
+	height:50px;
+	border-top:2px solid #E0E0E0;
+	border-bottom:1px solid #E0E0E0;
+	background-color:#f5f5f5;
+}
+
+#root > section > article > section > table>thead>tr>th:nth-of-type(-n+4)>p{
+	padding:5px 0;
+	border-right:1px solid #E0E0E0;
+	font-weight: 700;
+    font-size: 14px;
+}
+#root > section > article > section > table>tbody>tr{
+	cursor:pointer;
+}
+
+#root > section > article > section > table>tbody>tr>td{
+	height: 40px;
+    font-size: 14px;
+    text-align: center;
+    border-bottom:1px solid #E0E0E0;
+}
+
+#pageNation{
+	margin-top:20px;
+	display:flex;	
+}
+#pageNation>ul{
+	overflow:hidden;
+	margin:0 auto;
+}
+
+#pageNation>ul>li{
+	cursor:pointer;
+	float:left;
+	width:50px;
+	font-weight:700;
+	text-align:center;
+}

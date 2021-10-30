@@ -11,6 +11,8 @@ import java.util.List;
 import com.web.security.model.Board;
 import com.web.security.model.Member;
 import com.web.security.model.Message;
+import com.web.security.model.Page;
+import com.web.security.model.PageNation;
 
 @org.springframework.stereotype.Repository
 public class Repository {
@@ -65,7 +67,7 @@ public class Repository {
 			
 		}catch(Exception e) {
 			e.printStackTrace();
-			throw new Exception("login fail");
+			throw new Exception("로그인 정보를 확인해 주세요.");
 		}finally {
 			closer();
 		}
@@ -123,10 +125,37 @@ public class Repository {
 		}
 	}
 	
-	public List<Board> getBoardList() {
+	public <T extends PageNation> int getTotalCount(Class<T> pageNation) throws Exception  {
 		// TODO Auto-generated method stub
 		query = new StringBuffer();
-		query.append("SELECT id,title,memberId,visible,DATE_FORMAT(createdAt,'%Y-%m-%d %H:%i:%s') AS createdAt FROM `board` ORDER BY createdAt DESC");
+		query.append("SELECT COUNT(*) FROM ");
+		int result = 0;
+		if(pageNation.equals(Board.class)) {
+			query.append("`board`");
+		}else if(pageNation.equals(Message.class)){
+			query.append("`message`");
+		}
+		
+		try {
+			conn = DriverManager.getConnection(url,id,password);
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(query.toString());
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		}catch(Exception e) {
+			throw e;
+		}finally {
+			closer();
+		}
+		
+		return result;
+	}
+	
+	public Page<Board> getBoardList(Page<Board> page) throws Exception  {
+		// TODO Auto-generated method stub
+		query = new StringBuffer();
+		query.append("SELECT id,IF(visible=true,title,IF(memberId='"+page.getMemberId()+"',title,'비공개 글입니다.')) AS title,memberId,visible,DATE_FORMAT(createdAt,'%Y-%m-%d %H:%i:%s') AS createdAt FROM `board` ORDER BY id DESC LIMIT "+page.getStartRow()+","+page.getPageSize());
 		List<Board> result = new ArrayList<>();
 		try {
 			conn = DriverManager.getConnection(url,id,password);
@@ -142,13 +171,16 @@ public class Repository {
 				board.setCreatedAt(rs.getString("createdAt"));
 				result.add(board);
 			}
+			page.setList(result);
 		}catch(Exception e) {
+			System.out.println(query.toString());
 			e.printStackTrace();
+			throw e;
 		}finally {
 			closer();
 		}
 		
-		return result;
+		return page;
 	}
 	
 	public List<Message> getMessages(String memberId) {
@@ -175,7 +207,28 @@ public class Repository {
 		return result;
 	}
 	
+	public void joinMember(Member member) throws Exception{
+		// TODO Auto-generated method stub
+		query = new StringBuffer();
+		query.append("INSERT INTO `member`(`memberId`,`memberPassword`) VALUES (");
+		query.append("'"+member.getMemberId()+"',");
+		query.append("'"+member.getMemberPassword()+"'");
+		query.append(")");
+		try {
+			conn = DriverManager.getConnection(url,id,password);
+			stmt = conn.createStatement();
+			stmt.executeUpdate(query.toString());
+		}catch(Exception e) {
+			throw new Exception("회원 가입에 실패했습니다.");
+		}finally {
+			closer();
+		}
+	}
+	
+	
+	
 	private void closer() {
+		query = null;
 		if(rs!=null) {
 			try {
 				rs.close();
@@ -206,5 +259,8 @@ public class Repository {
 		}
 		
 	}
+
+
+
 
 }
