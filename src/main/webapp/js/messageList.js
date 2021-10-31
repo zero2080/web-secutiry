@@ -192,7 +192,7 @@ const detail = ({event,datum})=>{
 	let {fromId,content} = datum;
 	
 	msgWindow = window.open('','message','width=200, height=300, toolbar=no');
-	msgWindow.document.body.innerHTML=`<p style="border-bottom:1px solid black;">보낸 사람 : ${fromId}</p><p>${content}</p>`;
+	msgWindow.document.body.innerHTML=`<p style="border-bottom:1px solid black;">보낸 사람 : ${fromId}</p><p style="width:100%;word-break:break-all;">${content}</p>`;
 }
 
 nextPage();

@@ -23,7 +23,7 @@
 <meta name="description" content="보안 강좌 사이트"/>
 <link href="${conPath }/css/side_gnb.css" rel="stylesheet" type="text/css"></link>
 <script>
-	var conPath = '/';
+	var conPath = '';
 	var id = sessionStorage.getItem('memberId');
 	if(location.href.indexOf('/security')>0){
 		conPath = '/security'		
@@ -45,7 +45,7 @@
 	
 	const logout= ()=>{
 		sessionStorage.setItem('memberId','');
-		location.href=conPath;
+		location.href='/';
 	}
 	
 </script>
