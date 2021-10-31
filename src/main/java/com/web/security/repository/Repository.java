@@ -176,7 +176,6 @@ public class Repository {
 			}
 			page.setList(result);
 		}catch(Exception e) {
-			System.out.println(query.toString());
 			e.printStackTrace();
 			throw e;
 		}finally {
@@ -274,7 +273,6 @@ public class Repository {
 			stmt.executeUpdate(query.toString());
 			return true;
 		}catch(Exception e) {
-			System.out.println(query.toString());
 			e.printStackTrace();
 			throw e;
 		}finally {
